@@ -272,6 +272,8 @@ if uploaded_file:
             jd_skills = extract_jd_skills(
             job_description
             )
+            st.write("JD Skills:", jd_skills)
+            st.write("Resume Skills:", detected_skills)
 
         
 
@@ -377,6 +379,9 @@ if uploaded_file:
                 "⭐ Overall Resume Score",
                 f"{overall_score}/100"
             )
+            st.write("Detected Skills:", detected_skills)
+            st.write("JD Skills:", jd_skills)
+            st.write("JD Skills Count:", len(jd_skills))
 
             jd_skill_set={
             jd_skill.lower()
