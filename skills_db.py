@@ -4,16 +4,23 @@ skills = [
     "Java",
     "C++",
     "JavaScript",
+    "C",
 
     # Databases
     "SQL",
     "PostgreSQL",
     "MongoDB",
 
-    # Analytics
+    # Analytics & BI
+    "Excel",
     "Power BI",
     "Tableau",
-    "Excel",
+    "DAX",
+    "Data Analysis",
+    "Data Cleaning",
+    "Data Visualization",
+    "Dashboarding",
+    "Business Intelligence",
 
     # Data Science
     "Pandas",
@@ -21,6 +28,9 @@ skills = [
     "Scikit-learn",
     "Machine Learning",
     "Deep Learning",
+    "NLP",
+    "Generative AI",
+    "Statistics",
     "TensorFlow",
     "PyTorch",
 
@@ -34,9 +44,9 @@ skills = [
     "GCP",
 
     # DevOps
+    "Git",
     "Docker",
     "Kubernetes",
-    "Git",
 
     # Web
     "React",
