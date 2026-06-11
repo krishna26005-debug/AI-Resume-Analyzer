@@ -12,3 +12,4 @@ sentence-transformers
 torch
 torchvision
 fpdf2
+streamlit-pdf-viewer
