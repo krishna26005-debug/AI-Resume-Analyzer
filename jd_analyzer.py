@@ -1,5 +1,4 @@
 import re
-from turtle import st
 from skills_db import skills
 
 def extract_jd_skills(jd_text):
