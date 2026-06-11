@@ -1,0 +1,9 @@
+streamlit
+pandas
+numpy
+plotly
+python-dotenv
+google-genai
+PyPDF2
+reportlab
+scikit-learn
