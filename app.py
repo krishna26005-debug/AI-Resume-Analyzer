@@ -366,7 +366,7 @@ if uploaded_file:
                     "Status",
                     "Low"
                     )        
-            st.progress( ats_score/100)
+            st.progress(min(max(float(ats_score/100), 0), 1))
 
             overall_score=round(
                 (ats_score+health_score)/2
