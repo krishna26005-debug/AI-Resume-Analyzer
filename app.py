@@ -179,16 +179,30 @@ if uploaded_file:
                 for line in projects_section.split("\n")
                 if "|" in line
            ])
-        cert_section = ""
+        def count_certifications(resume_text):
+            import re
 
-        cert_count = len([
-            line
-            for line in cert_section.split("\n")
-            if line.strip().startswith("•")
-        ])        
+            cert_match = re.search(
+                r"CERTIFICATIONS(.*?)(SOFT SKILLS|$)",
+                resume_text,
+                re.IGNORECASE | re.DOTALL
+            )
+
+            if cert_match:
+                cert_section = cert_match.group(1)
+
+                certs = [
+                line.strip()
+                for line in cert_section.split("\n")
+                if line.strip().startswith("•")
+            ]
+
+            return len([c for c in certs if len(c) > 3])
+
+            return 0        
         
         
-        
+        cert_count = count_certifications(resume_text)
         st.subheader("📊 Resume Statistics")
         
         col1,col2,col3,col4,col5=st.columns(5)
