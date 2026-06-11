@@ -5,7 +5,9 @@ plotly
 python-dotenv
 google-genai
 PyPDF2
+pdfplumber
 reportlab
 scikit-learn
-pdfplumber
 sentence-transformers
+torch
+torchvision
