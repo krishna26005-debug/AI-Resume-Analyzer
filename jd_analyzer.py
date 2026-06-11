@@ -1,4 +1,5 @@
 import re
+from turtle import st
 from skills_db import skills
 
 def extract_jd_skills(jd_text):
@@ -15,3 +16,4 @@ def extract_jd_skills(jd_text):
             found.append(skill)
 
     return sorted(list(set(found)))
+    
