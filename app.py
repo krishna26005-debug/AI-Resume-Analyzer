@@ -272,8 +272,7 @@ if uploaded_file:
             jd_skills = extract_jd_skills(
             job_description
             )
-            st.write("JD Skills:", jd_skills)
-            st.write("Resume Skills:", detected_skills)
+            
 
         
 
