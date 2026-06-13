@@ -403,12 +403,40 @@ if uploaded_file:
             )*100,
             2
             ) if jd_skills else 0
+
+            recommendations = []
+
+            for skill in missing_skills:
+               recommendations.append(
+                    f"Add projects, certifications, or practical experience related to {skill}."
+            )
+
+            if ats_score < 80:
+                 recommendations.append(
+                    "Improve ATS compatibility by incorporating more keywords from the job description."
+            )
+
+            if match_score < 70:
+                recommendations.append(
+                    "Tailor your resume more closely to the target role and highlight relevant achievements."
+            )
+
+            if len(matched_skills) < 5:
+                recommendations.append(
+                    "Expand your technical skills section with additional relevant tools and technologies."
+            )
+
+            if not recommendations:
+                recommendations.append(
+                    "Excellent alignment with the job description. Continue showcasing measurable achievements and impactful projects."
+            )
         
             report_file=generate_report(
             ats_score,
             match_score,
             matched_skills,
-            missing_skills
+            missing_skills,
+            recommendations
             )
 
             st.markdown("---")
