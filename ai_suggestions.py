@@ -5,7 +5,7 @@ import os
 import streamlit as st
 
 client = genai.Client(
-    api_key=st.secrets.get("GEMINI_API_KEY")
+    api_key=st.secrets.get["GEMINI_API_KEY"]
 )
 
 def get_resume_suggestions(
