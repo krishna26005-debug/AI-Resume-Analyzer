@@ -14,6 +14,7 @@ def generate_report(
 
     pdf = FPDF()
     pdf.add_page()
+    pdf.set_auto_page_break(auto=True, margin=15)
 
     # ==========================
     # TITLE
@@ -23,7 +24,8 @@ def generate_report(
         0,
         12,
         "AI Resume Analyzer Report",
-        ln=True,
+        new_x="LMARGIN",
+        new_y="NEXT",
         align="C"
     )
 
@@ -33,7 +35,13 @@ def generate_report(
     # SUMMARY
     # ==========================
     pdf.set_font("Helvetica", "B", 14)
-    pdf.cell(0, 10, "Candidate Analysis Summary", ln=True)
+    pdf.cell(
+        0,
+        10,
+        "Candidate Analysis Summary",
+        new_x="LMARGIN",
+        new_y="NEXT"
+    )
 
     pdf.set_font("Helvetica", "", 12)
 
@@ -41,14 +49,16 @@ def generate_report(
         0,
         8,
         f"ATS Score: {ats_score}/100",
-        ln=True
+        new_x="LMARGIN",
+        new_y="NEXT"
     )
 
     pdf.cell(
         0,
         8,
         f"Resume Match: {match_score}%",
-        ln=True
+        new_x="LMARGIN",
+        new_y="NEXT"
     )
 
     if ats_score >= 80:
@@ -62,7 +72,8 @@ def generate_report(
         0,
         8,
         f"Status: {status}",
-        ln=True
+        new_x="LMARGIN",
+        new_y="NEXT"
     )
 
     pdf.ln(5)
@@ -71,7 +82,13 @@ def generate_report(
     # MATCHED SKILLS
     # ==========================
     pdf.set_font("Helvetica", "B", 13)
-    pdf.cell(0, 10, "MATCHED SKILLS", ln=True)
+    pdf.cell(
+        0,
+        10,
+        "MATCHED SKILLS",
+        new_x="LMARGIN",
+        new_y="NEXT"
+    )
 
     pdf.set_font("Helvetica", "", 12)
 
@@ -80,15 +97,17 @@ def generate_report(
             pdf.cell(
                 0,
                 8,
-                f"✓ {skill}",
-                ln=True
+                f"[MATCH] {skill}",
+                new_x="LMARGIN",
+                new_y="NEXT"
             )
     else:
         pdf.cell(
             0,
             8,
             "No matched skills found.",
-            ln=True
+            new_x="LMARGIN",
+            new_y="NEXT"
         )
 
     pdf.ln(5)
@@ -97,7 +116,13 @@ def generate_report(
     # MISSING SKILLS
     # ==========================
     pdf.set_font("Helvetica", "B", 13)
-    pdf.cell(0, 10, "MISSING SKILLS", ln=True)
+    pdf.cell(
+        0,
+        10,
+        "MISSING SKILLS",
+        new_x="LMARGIN",
+        new_y="NEXT"
+    )
 
     pdf.set_font("Helvetica", "", 12)
 
@@ -106,15 +131,17 @@ def generate_report(
             pdf.cell(
                 0,
                 8,
-                f"✗ {skill}",
-                ln=True
+                f"[MISSING] {skill}",
+                new_x="LMARGIN",
+                new_y="NEXT"
             )
     else:
         pdf.cell(
             0,
             8,
             "No missing skills detected.",
-            ln=True
+            new_x="LMARGIN",
+            new_y="NEXT"
         )
 
     pdf.ln(5)
@@ -123,7 +150,13 @@ def generate_report(
     # RECOMMENDATIONS
     # ==========================
     pdf.set_font("Helvetica", "B", 13)
-    pdf.cell(0, 10, "RECOMMENDATIONS", ln=True)
+    pdf.cell(
+        0,
+        10,
+        "RECOMMENDATIONS",
+        new_x="LMARGIN",
+        new_y="NEXT"
+    )
 
     pdf.set_font("Helvetica", "", 12)
 
@@ -132,8 +165,14 @@ def generate_report(
             pdf.multi_cell(
                 0,
                 8,
-                f"• {recommendation}"
+                f"- {recommendation}"
             )
+    else:
+        pdf.multi_cell(
+            0,
+            8,
+            "Your resume aligns well with the job description."
+        )
 
     pdf.ln(5)
 
@@ -147,7 +186,8 @@ def generate_report(
         0,
         8,
         f"Generated on: {current_date}",
-        ln=True
+        new_x="LMARGIN",
+        new_y="NEXT"
     )
 
     file_name = "resume_report.pdf"
