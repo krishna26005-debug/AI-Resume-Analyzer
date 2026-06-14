@@ -150,52 +150,30 @@ def generate_report(
     # RECOMMENDATIONS
     # ==========================
  
-    pdf.set_font("Helvetica", "B", 13)
+    # RECOMMENDATIONS
 
-    pdf.cell(0, 8, "-" * 35, new_x="LMARGIN", new_y="NEXT")
+    pdf.set_font("Helvetica", "B", 13)
     pdf.cell(0, 8, "RECOMMENDATIONS", new_x="LMARGIN", new_y="NEXT")
-    pdf.cell(0, 8, "-" * 35, new_x="LMARGIN", new_y="NEXT")
- 
+
     pdf.set_font("Helvetica", "", 12)
 
     if recommendations:
         for recommendation in recommendations:
-
-            recommendation = str(recommendation).strip()
-
-        # Remove problematic unicode characters
-            recommendation = (
-                recommendation
-                .replace("✓", "")
-                .replace("✗", "")
-                .replace("•", "*")
-                .replace("–", "-")
-                .replace("—", "-")
-                .replace("“", '"')
-                .replace("”", '"')
-                .replace("'", "'")
-                .replace("'", "'")
-            )
-
-        # Convert to latin-1 safe text
-            recommendation = recommendation.encode(
-                "latin-1",
-                "ignore"
-            ).decode("latin-1")
+            pdf.set_x(pdf.l_margin)
 
             pdf.multi_cell(
-                0,
+                180,
                 8,
-                "- " + recommendation
+                "- " + str(recommendation)
             )
+
+        pdf.ln(1)
     else:
         pdf.multi_cell(
-            0,
-            8,
-            "Resume aligns well with the job description."
+        180,
+        8,
+        "Resume aligns well with the job description."
         )
-
-    pdf.ln(5)
 
     # ==========================
     # FOOTER
