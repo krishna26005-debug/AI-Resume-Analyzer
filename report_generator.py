@@ -167,7 +167,7 @@ def generate_report(
                 "- " + str(recommendation)
             )
 
-        pdf.ln(1)
+            pdf.ln(1)
     else:
         pdf.multi_cell(
         180,
