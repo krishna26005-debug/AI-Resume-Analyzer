@@ -378,9 +378,7 @@ if uploaded_file:
                 "⭐ Overall Resume Score",
                 f"{overall_score}/100"
             )
-            st.write("Detected Skills:", detected_skills)
-            st.write("JD Skills:", jd_skills)
-            st.write("JD Skills Count:", len(jd_skills))
+            
 
             jd_skill_set={
             jd_skill.lower()
@@ -430,8 +428,7 @@ if uploaded_file:
                 recommendations.append(
                     "Excellent alignment with the job description. Continue showcasing measurable achievements and impactful projects."
             )
-            st.write("Recommendations Debug:")
-            st.write(recommendations)
+            
         
             report_file=generate_report(
             ats_score,
