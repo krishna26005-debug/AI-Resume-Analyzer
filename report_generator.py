@@ -161,7 +161,7 @@ def generate_report(
     if recommendations:
         for recommendation in recommendations:
 
-            recommendation = str(recommendation)
+            recommendation = str(recommendation).strip()
 
         # Remove problematic unicode characters
             recommendation = (
