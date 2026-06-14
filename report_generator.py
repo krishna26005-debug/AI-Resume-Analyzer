@@ -162,6 +162,17 @@ def generate_report(
 
     if recommendations:
         for recommendation in recommendations:
+            recommendation = (
+                recommendation
+                .replace("✓", "[MATCH]")
+                .replace("✗", "[MISSING]")
+                .replace("•", "*")
+                .replace("–", "-")
+        .replace("—", "-")
+    )
+
+    if recommendations:
+        for recommendation in recommendations:
             pdf.multi_cell(
                 0,
                 8,
