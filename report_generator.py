@@ -29,7 +29,7 @@ def generate_report(
         align="C"
     )
 
-    pdf.set_font("Helvetica", "", 11)
+    pdf.set_font("Helvetica", "", 10)
     pdf.cell(
         0,
         8,
@@ -44,6 +44,13 @@ def generate_report(
     # =====================================
     # SUMMARY BOX
     # =====================================
+    if ats_score >= 80:
+        status = "Excellent"
+    elif ats_score >= 60:
+        status = "Good"
+    else:
+        status = "Needs Improvement"
+
     pdf.set_font("Helvetica", "B", 14)
     pdf.cell(
         0,
@@ -53,29 +60,41 @@ def generate_report(
         new_y="NEXT"
     )
 
-    pdf.rect(10, pdf.get_y(), 190, 30)
+    pdf.rect(10, pdf.get_y(), 190, 32)
 
-    start_y = pdf.get_y() + 4
+    y = pdf.get_y() + 4
 
-    pdf.set_xy(15, start_y)
-
-    if ats_score >= 80:
-        status = "Excellent"
-    elif ats_score >= 60:
-        status = "Good"
-    else:
-        status = "Needs Improvement"
-
+    pdf.set_xy(15, y)
     pdf.set_font("Helvetica", "", 12)
 
-    pdf.cell(0, 6, f"ATS Score       : {ats_score}/100", new_x="LMARGIN", new_y="NEXT")
-    pdf.cell(0, 6, f"Resume Match    : {match_score}%", new_x="LMARGIN", new_y="NEXT")
-    pdf.cell(0, 6, f"Status          : {status}", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(
+        0,
+        7,
+        f"ATS Score       : {ats_score}/100",
+        new_x="LMARGIN",
+        new_y="NEXT"
+    )
+
+    pdf.cell(
+        0,
+        7,
+        f"Resume Match    : {match_score}%",
+        new_x="LMARGIN",
+        new_y="NEXT"
+    )
+
+    pdf.cell(
+        0,
+        7,
+        f"Status          : {status}",
+        new_x="LMARGIN",
+        new_y="NEXT"
+    )
 
     pdf.ln(10)
 
     # =====================================
-    # PROGRESS BARS
+    # PERFORMANCE OVERVIEW
     # =====================================
     pdf.set_font("Helvetica", "B", 14)
     pdf.cell(
@@ -86,15 +105,18 @@ def generate_report(
         new_y="NEXT"
     )
 
-    pdf.set_font("Courier", "", 11)
+    pdf.set_font("Courier", "", 10)
 
-    ats_bar = "█" * int(ats_score / 10) + "░" * (10 - int(ats_score / 10))
-    match_bar = "█" * int(match_score / 10) + "░" * (10 - int(match_score / 10))
+    ats_bar = "#" * int(ats_score / 10)
+    ats_bar += "-" * (10 - int(ats_score / 10))
+
+    match_bar = "#" * int(match_score / 10)
+    match_bar += "-" * (10 - int(match_score / 10))
 
     pdf.cell(
         0,
         8,
-        f"ATS Score      [{ats_bar}] {ats_score}%",
+        f"ATS Score      [{ats_bar}]",
         new_x="LMARGIN",
         new_y="NEXT"
     )
@@ -102,12 +124,12 @@ def generate_report(
     pdf.cell(
         0,
         8,
-        f"Resume Match   [{match_bar}] {match_score}%",
+        f"Resume Match   [{match_bar}]",
         new_x="LMARGIN",
         new_y="NEXT"
     )
 
-    pdf.ln(5)
+    pdf.ln(4)
 
     # =====================================
     # MATCHED SKILLS
@@ -122,17 +144,29 @@ def generate_report(
         new_y="NEXT"
     )
 
-    pdf.set_font("Helvetica", "", 11)
-
-    matched_text = " | ".join(matched_skills)
-
-    pdf.multi_cell(
-        0,
-        8,
-        matched_text
-    )
+    pdf.line(10, pdf.get_y(), 200, pdf.get_y())
 
     pdf.ln(3)
+
+    pdf.set_font("Helvetica", "", 11)
+
+    if matched_skills:
+        skills_text = " | ".join(sorted(matched_skills))
+        pdf.multi_cell(
+            0,
+            7,
+            skills_text
+        )
+    else:
+        pdf.cell(
+            0,
+            7,
+            "No matched skills found.",
+            new_x="LMARGIN",
+            new_y="NEXT"
+        )
+
+    pdf.ln(4)
 
     # =====================================
     # MISSING SKILLS
@@ -147,23 +181,29 @@ def generate_report(
         new_y="NEXT"
     )
 
+    pdf.line(10, pdf.get_y(), 200, pdf.get_y())
+
+    pdf.ln(3)
+
     pdf.set_font("Helvetica", "", 11)
 
     if missing_skills:
-        missing_text = " | ".join(missing_skills)
+        missing_text = " | ".join(sorted(missing_skills))
         pdf.multi_cell(
             0,
-            8,
+            7,
             missing_text
         )
     else:
-        pdf.multi_cell(
+        pdf.cell(
             0,
-            8,
-            "No missing skills detected."
+            7,
+            "No missing skills detected.",
+            new_x="LMARGIN",
+            new_y="NEXT"
         )
 
-    pdf.ln(3)
+    pdf.ln(4)
 
     # =====================================
     # RECOMMENDATIONS
@@ -178,30 +218,45 @@ def generate_report(
         new_y="NEXT"
     )
 
+    pdf.line(10, pdf.get_y(), 200, pdf.get_y())
+
+    pdf.ln(3)
+
     pdf.set_font("Helvetica", "", 11)
 
-    for i, recommendation in enumerate(recommendations, 1):
+    if recommendations:
+        for i, recommendation in enumerate(recommendations, start=1):
 
-        clean_text = (
-            str(recommendation)
-            .replace("✓", "")
-            .replace("✗", "")
-            .replace("•", "")
-            .replace("✔", "")
-            .replace("❌", "")
-        )
+            clean_text = (
+                str(recommendation)
+                .encode("latin-1", "ignore")
+                .decode("latin-1")
+            )
 
+            pdf.multi_cell(
+                0,
+                7,
+                f"{i}. {clean_text}"
+            )
+
+            pdf.ln(1)
+
+    else:
         pdf.multi_cell(
             0,
-            8,
-            f"{i}. {clean_text}"
+            7,
+            "Your resume aligns well with the job description."
         )
 
-    pdf.ln(5)
+    pdf.ln(6)
 
     # =====================================
     # FOOTER
     # =====================================
+    pdf.line(10, pdf.get_y(), 200, pdf.get_y())
+
+    pdf.ln(4)
+
     pdf.set_font("Helvetica", "I", 10)
 
     pdf.cell(
