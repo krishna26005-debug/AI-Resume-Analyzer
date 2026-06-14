@@ -430,6 +430,8 @@ if uploaded_file:
                 recommendations.append(
                     "Excellent alignment with the job description. Continue showcasing measurable achievements and impactful projects."
             )
+            st.write("Recommendations Debug:")
+            st.write(recommendations)
         
             report_file=generate_report(
             ats_score,
