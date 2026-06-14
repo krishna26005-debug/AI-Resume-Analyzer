@@ -130,11 +130,11 @@ streamlit run app.py
 
 ### ATS Analysis
 
-assets/ats_analysis.png
+![ATS Analysis](assets/ats_analysis.png)
 
 ### PDF Report
 
-assets/pdf_report.png
+![PDF Report](assets/pdf_report.png)
 
 ## Sample Output
 
