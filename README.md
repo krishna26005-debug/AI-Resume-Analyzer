@@ -1,5 +1,8 @@
 # AI Resume Analyzer
 
+## Live Demo
+[Launch Application](https://ai-resume-analyzer-uosfj7q4sblw3ip3cxuzsg.streamlit.app/)
+
 An AI-powered Resume Analyzer that evaluates ATS compatibility, matches resumes against job descriptions, identifies skill gaps, and generates personalized improvement suggestions using Google Gemini AI.
 
 ## Features
