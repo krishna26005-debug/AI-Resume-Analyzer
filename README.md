@@ -126,15 +126,15 @@ streamlit run app.py
 
 ### Dashboard
 
-Add screenshot here
+![Dashboard](assets/dashboard.png)
 
 ### ATS Analysis
 
-Add screenshot here
+assets/ats_analysis.png
 
 ### PDF Report
 
-Add screenshot here
+assets/pdf_report.png
 
 ## Sample Output
 
